@@ -29,4 +29,5 @@ jobs:
 ```
 
 ## Details
-https://docs.codeclimate.com/docs/configuring-test-coverage
+* https://docs.codeclimate.com/docs/configuring-test-coverage
+* https://docs.codeclimate.com/docs/circle-ci-test-coverage-example
