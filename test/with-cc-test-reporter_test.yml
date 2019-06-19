@@ -1,0 +1,48 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: golang:alpine
+
+jobs:
+  build:
+    executor: default
+
+    environment:
+      CC_TEST_REPORTER_ID: fb7ad2140d874f64ea4996630c0a70ae1543ecf9d949f7474e0b1b5c12da8a55
+
+    steps:
+      - run: apk --update --no-cache add git curl
+
+      - run:
+          name: Put main.go
+          # FIXME: '<<' is special character for CircleCI 2.1+. So `cat test.gemfile << EOS` does't work in config.yml...
+          command: |
+            echo 'package main'             >  main.go
+            echo 'func sum(a, b int) int {' >> main.go
+            echo '  return a + b'           >> main.go
+            echo '}'                        >> main.go
+
+      - run:
+          name: Put main_test.go
+          command: |
+            echo 'package main'                  >  main_test.go
+            echo 'import "testing"'              >> main_test.go
+            echo 'func Test_sum(t *testing.T) {' >> main_test.go
+            echo '  sum(1, 2)'                   >> main_test.go
+            echo '}'                             >> main_test.go
+
+      - run:
+          name: Setup git
+          command: |
+            git init
+            git config push.default current
+            git config user.email "$EMAIL"
+            git config user.name "CircleCI"
+            git add .
+            git commit -m "Initial commit"
+
+      - codeclimate/with-cc-test-reporter:
+          steps:
+            - run: go test -coverprofile c.out

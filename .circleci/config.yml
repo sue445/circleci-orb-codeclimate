@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  orb-tools: circleci/orb-tools@8.23.1
+
+workflows:
+  version: 2
+
+  build:
+    jobs:
+      - orb-tools/pack:
+          source-dir: src/
+          destination-orb-path: packed/orb.yml
+          workspace-path: packed/orb.yml
+          artifact-path: packed/orb.yml
+
+      - orb-tools/test-in-builds:
+          orb-location: packed/orb.yml
+          orb-name: codeclimate
+          test-steps:
+            - orb-tools/local-test-build:
+                test-config-location: test/with-cc-test-reporter_test.yml
+          attach-workspace: true
+          checkout: true
+          workspace-root: /home/circleci/project/
+          requires:
+            - orb-tools/pack

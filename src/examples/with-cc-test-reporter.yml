@@ -1,0 +1,23 @@
+description: |
+  Run your test between `cc-test-reporter before-build` and `cc-test-reporter after-build`
+  Setup and teardown
+
+usage:
+  version: 2.1
+
+  orbs:
+    codeclimate: sue445/codeclimate@x.y.z
+
+    jobs:
+      test:
+        environment:
+          CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
+
+        steps:
+          - checkout
+
+          - with-cc-test-reporter:
+              after_build_args: "--coverage-input-type simplecov"
+
+              steps:
+                - run: bundle exec rspec

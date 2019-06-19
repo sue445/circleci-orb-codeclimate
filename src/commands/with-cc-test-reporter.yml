@@ -1,0 +1,33 @@
+description: "Run test with cc-test-reporter"
+
+parameters:
+  steps:
+    type: steps
+    default: []
+    description: "Run steps between `before-build` and `after-build`"
+
+  after_build_args:
+    type: string
+    default: ""
+    description: "Pass to cc-test-reporter after-build"
+
+steps:
+  - run:
+      name: Setup Code Climate test-reporter
+      command: |
+        # download test reporter as a static binary
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+
+  - run:
+      name: "Setup cc-test-reporter"
+      command: |
+        ./cc-test-reporter before-build
+
+  - steps: << parameters.steps >>
+
+  - run:
+      name: Teardown cc-test-reporter
+      command: |
+        ./cc-test-reporter after-build << parameters.after_build_args >> --exit-code $?
+      when: always
