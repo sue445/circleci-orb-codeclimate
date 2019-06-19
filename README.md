@@ -14,8 +14,8 @@ orbs:
 
 jobs:
   test:
-  environment:
-    CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
+    environment:
+      CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
   
     steps:
       - checkout
