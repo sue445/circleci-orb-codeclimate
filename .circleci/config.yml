@@ -53,14 +53,12 @@ workflows:
           attach-workspace: true
           checkout: false
           requires: [orb-tools/test-in-builds]
-          context: CircleCI
           filters:
             branches:
               only: master
 
       - push_latest_version_tag:
           requires: [orb-tools/increment]
-          context: CircleCI
           filters:
             branches:
               only: master
@@ -87,7 +85,6 @@ workflows:
           attach-workspace: true
           checkout: false
           requires: [orb-tools/pack]
-          context: CircleCI
           filters:
             tags:
               only: /^[0-9.]+\.0$/
