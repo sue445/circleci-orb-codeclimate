@@ -92,7 +92,7 @@ workflows:
 
       - orb-tools/publish:
           orb-path: packed/orb.yml
-          orb-ref: "sue445/ruby-orbs@${CIRCLE_TAG}"
+          orb-ref: "sue445/codeclimate@${CIRCLE_TAG}"
           publish-token-variable: "CIRCLECI_API_TOKEN"
           attach-workspace: true
           checkout: false
