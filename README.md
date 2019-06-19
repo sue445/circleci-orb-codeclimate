@@ -16,15 +16,15 @@ jobs:
   test:
   environment:
     CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
-
-  steps:
-    - checkout
-
-    - with-cc-test-reporter:
-        after_build_args: "--coverage-input-type simplecov"
-
-        steps:
-          - run: bundle exec rspec
+  
+    steps:
+      - checkout
+  
+      - with-cc-test-reporter:
+          after_build_args: "--coverage-input-type simplecov"
+  
+          steps:
+            - run: bundle exec rspec
 ```
 
 ## Details
