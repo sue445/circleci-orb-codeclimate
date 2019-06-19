@@ -45,6 +45,15 @@ workflows:
           requires:
             - orb-tools/pack
 
+      - orb-tools/publish-dev:
+          orb-path: packed/orb.yml
+          orb-name: "sue445/codeclimate"
+          publish-token-variable: "CIRCLECI_API_TOKEN"
+          attach-workspace: true
+          workspace-root: /home/circleci/project/
+          checkout: false
+          requires: [orb-tools/pack]
+
       - orb-tools/increment:
           orb-path: packed/orb.yml
           orb-ref: "sue445/codeclimate"
@@ -52,6 +61,7 @@ workflows:
           publish-token-variable: "CIRCLECI_API_TOKEN"
           attach-workspace: true
           checkout: false
+          workspace-root: /home/circleci/project/
           requires: [orb-tools/test-in-builds]
           context: CircleCI
           filters:
@@ -86,6 +96,7 @@ workflows:
           publish-token-variable: "CIRCLECI_API_TOKEN"
           attach-workspace: true
           checkout: false
+          workspace-root: /home/circleci/project/
           requires: [orb-tools/pack]
           context: CircleCI
           filters:
