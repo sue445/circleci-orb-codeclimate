@@ -20,7 +20,7 @@ jobs:
     steps:
       - checkout
   
-      - with-cc-test-reporter:
+      - codeclimate/with-cc-test-reporter:
           after_build_args: "--coverage-input-type simplecov"
   
           steps:
