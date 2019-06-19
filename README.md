@@ -3,6 +3,7 @@ CircleCI orb for [Code Climate](https://codeclimate.com/)
 
 https://circleci.com/orbs/registry/orb/sue445/codeclimate
 
+[![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/sue445/codeclimate)](https://circleci.com/orbs/registry/orb/sue445/codeclimate) 
 [![CircleCI](https://circleci.com/gh/sue445/circleci-orb-codeclimate/tree/master.svg?style=svg)](https://circleci.com/gh/sue445/circleci-orb-codeclimate/tree/master)
 
 ## Example
