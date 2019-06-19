@@ -14,17 +14,17 @@ orbs:
 
 jobs:
   test:
-	environment:
-	  CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
+  environment:
+    CC_TEST_REPORTER_ID: YOUR_CODE_CLIMATE_REPORTER_ID
 
-	steps:
-	  - checkout
+  steps:
+    - checkout
 
-	  - with-cc-test-reporter:
-		  after_build_args: "--coverage-input-type simplecov"
+    - with-cc-test-reporter:
+        after_build_args: "--coverage-input-type simplecov"
 
-		  steps:
-			- run: bundle exec rspec
+        steps:
+          - run: bundle exec rspec
 ```
 
 ## Details
