@@ -45,6 +45,28 @@ workflows:
           requires:
             - orb-tools/pack
 
+      - orb-tools/increment:
+          orb-path: packed/orb.yml
+          orb-ref: "sue445/codeclimate"
+          segment: "patch"
+          publish-token-variable: "$CIRCLECI_API_TOKEN"
+          attach-workspace: true
+          checkout: false
+          requires: [orb-tools/test-in-builds]
+          context: CircleCI
+          filters:
+            branches:
+              only: master
+
+      - push_latest_version_tag:
+          requires: [orb-tools/increment]
+          context: CircleCI
+          filters:
+            branches:
+              only: master
+            tags:
+              ignore: /.*/
+
   release:
     jobs:
       - orb-tools/pack:
